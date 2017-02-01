@@ -1,0 +1,48 @@
+public static void ReadMail_ClickLink(String sTestName) throws IOException, InterruptedException, HeadlessException, AWTException {
+		 String sDesc="", vbPath, arg; 
+		 sDesc = Reporter.log(sTestName) ;
+		
+		 
+		 try{
+		
+			 	arg = System.getProperty("user.dir").replace("\\", "/") +"/Packages";
+			 	File file = new File(arg+"/temp.txt");
+			 	
+			 	file.delete();
+
+			 	Thread.sleep(30000);
+			 
+			 	vbPath = "\""+System.getProperty("user.dir").replace("\\", "/") +"/Packages/openExcelVB.vbs\"";
+			 	Runtime.getRuntime().exec( "cscript " +vbPath+ " \""+arg+ "\"");
+			 
+			 	Thread.sleep(3000);
+			 	int i=0;String line = "";
+			 
+			 	while (i<30) {
+			 		try {
+			 			FileReader inputFile = new FileReader(arg+"/temp.txt");
+
+			 			BufferedReader bufferReader = new BufferedReader(inputFile);
+			 			
+			 			while ((line = bufferReader.readLine()) != null)   {
+			 				line+=line;;
+			 			}
+			 			bufferReader.close();
+			 			
+			 		} catch (FileNotFoundException e)	{
+			 				Thread.sleep(1000);
+			 				i++;
+			 		}
+			 	}
+			 	
+			 	if (line.contains("Success"))
+	 				Reporter.print(sTestName, sDesc +" :: Performed");
+	 			else {
+	 				Reporter.print(sTestName, sDesc + " ::Problem reading email"); 			}
+	 	
+		 	} catch(Exception e) {
+		 		if (Utils.handleIntermediateIssue()) {ReadMail_ClickLink(sTestName); }
+				Reporter.exceptionHandler(sTestName, e, sDesc);
+			
+		 	}
+	 }
