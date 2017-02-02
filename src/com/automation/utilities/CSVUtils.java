@@ -19,7 +19,6 @@ public class CSVUtils {
             System.out.println("Country [id= " + line.get(0) + ", code= " + line.get(1) + " , name=" + line.get(2) + "]");
         }
         scanner.close();
-
     }
 
     public static List<String> parseLine(String cvsLine) {
