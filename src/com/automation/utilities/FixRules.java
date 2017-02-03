@@ -49,4 +49,8 @@ public class FixRules {
 	public void setFile(String file) {
 		File = file;
 	}
+	public String toString()
+	{
+		return "";
+	}
 }

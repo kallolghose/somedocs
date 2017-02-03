@@ -1,5 +1,7 @@
 package com.automation.utilities;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Violation_Fixation 
@@ -13,7 +15,24 @@ public class Violation_Fixation
 	private String fixRule;
 	private String fixElement;
 	private String fixComments; //AUTO-FIXED, RULE NOT PRESENT, SKIPPED
-	private Date fixDate;
+	private String fixDate;
+	
+	public Violation_Fixation()
+	{
+		violationPagename = "";
+		violationID = "";
+		violationDescription = "";
+		violationDate = "";
+		violationElement = "";
+		
+		fixRule = "";
+		fixElement = "";
+		fixComments = "";
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		fixDate = dateFormat.format(date);
+	}
 	
 	public String getViolationPagename() {
 		return violationPagename;
@@ -63,10 +82,25 @@ public class Violation_Fixation
 	public void setFixComments(String fixComments) {
 		this.fixComments = fixComments;
 	}
-	public Date getFixDate() {
+	public String getFixDate() {
 		return fixDate;
 	}
-	public void setFixDate(Date fixDate) {
+	public void setFixDate(String fixDate) {
 		this.fixDate = fixDate;
+	}
+	
+	public String toString()
+	{
+		try
+		{
+			return violationPagename+", " + violationID + ", " + violationDescription + ", " + violationElement + ", " + violationDate
+					+ ", " + fixRule + ", " + fixElement + ", " + fixComments + ", " + fixDate;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return "";
 	}
 }

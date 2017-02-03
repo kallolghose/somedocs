@@ -7,6 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 public class ExcelUtility 
 {
@@ -25,7 +26,7 @@ public class ExcelUtility
 			while(itr.hasNext())
 			{
 				Row row = itr.next();
-				if(!row.getCell(0).getStringCellValue().equals(""))
+				if(row.getCell(0)!=null)
 				{
 					FixRules data = new FixRules();
 					data.setTag(row.getCell(0).getStringCellValue());
@@ -60,6 +61,7 @@ public class ExcelUtility
 		}
 		return null;
 	}
+	
 	
 	
 }
